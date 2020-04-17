@@ -3,6 +3,7 @@ import java.io.*;
 import java.util.InputMismatchException;
 import java.util.*;
 import javax.swing.JOptionPane;
+import java.math.BigInteger;
 
 public class recursion {
 		 
@@ -38,7 +39,8 @@ public class recursion {
 		  String input = "";
  
 		  input = 
-		  JOptionPane.showInputDialog("Your turn! Enter a positive integer between 1 and 20.");   
+		  JOptionPane.showInputDialog("Your turn! Enter a positive integer between 1 and 10.");   
+		  if(input == null) System.exit(0);	//exit on cancel
 		  		
 //error checking          
 		   try
@@ -52,15 +54,11 @@ public class recursion {
 		    }
 		      	
 //error checking for numbers outside specified range
-			if(!(urResult < 21) | !(urResult > 0))
+			if(!(urResult < 11) | !(urResult > 0))
 			{						          
 			System.out.println("\n \n well... you're a jerk.");
 			System.exit(0);				//close program	if the user decides to be a jerk			        	
-
-			input = 
-					JOptionPane.showInputDialog("Enter a positive integer between 1 and 10.");   
-				  		          
-			urResult = Integer.parseInt(input);	
+			
 			 } //end if
 		         
 			 urFact(urResult); //sends urResult to method urFact
@@ -81,11 +79,21 @@ public class recursion {
 //is passed int u from some other place and users it		   
 	int urFact(int u)	
 	{
+		
 		int urResult;	 
 				   
 		if (u == 1) return 1;				   
-		urResult = fact (u-1) * u;	//performs factorial operation
+		urResult = urFact (u-1) * u;	//performs factorial operation
+		
+		//handling for large numbers
+		/* https://www.geeksforgeeks.org/biginteger-class-in-java/
+		if(urResult > 2147483647) {
+		BigInteger bigNumber;
 
+		BigInteger bigInt = BigInteger.valueOf(urResult);
+		System.out.println("Your bigInt: " + bigInt);
+		}
+		*/
 		return urResult;	
 	} //end method
 		     
@@ -98,6 +106,7 @@ public class recursion {
 		String str = 
 		 JOptionPane.showInputDialog("Type something below");   
 		 Other(str);
+		 if(str == null) System.exit(0);	//exit on cancel
 				 
 		 System.out.println("\nHere you go: \n" + Other(str)); 
 		    	 
